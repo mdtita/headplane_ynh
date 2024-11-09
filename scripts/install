@@ -10,7 +10,7 @@ git config --system --add safe.directory $install_dir
 git clone https://github.com/tale/headplane.git "$install_dir" --quiet
 
 chmod -R o-rwx "$install_dir"
-chown -R root:www-data "$install_dir"
+chown -R headplane:www-data "$install_dir"
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -24,10 +24,9 @@ ynh_nodejs_install
 #=================================================
 ynh_script_progression --message="Building $app... (this will take some time and resources!)" --weight=3
 pushd "$install_dir"
-	ynh_use_nodejs
-	ynh_exec_warn_less npm install -g pnpm
-	ynh_exec_warn_less pnpm install
-	ynh_exec_warn_less pnpm build
+	ynh_exec_as_app npm install -g pnpm
+	ynh_exec_as_app pnpm install
+	ynh_exec_as_app pnpm build
 popd
 randomstr=$(ynh_string_random --length=16)
 
