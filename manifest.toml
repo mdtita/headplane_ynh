@@ -1,13 +1,13 @@
 packaging_format = 2
 
-id = "helloworld"
-name = "Hello World"
+id = "headplane"
+name = "Headplane"
 description.en = "A dummy basic app to illustrate YunoHost's app packaging."
 description.fr = "Une app simple et bidon pour illustrer comme le packaging d'app de YunoHost fonctionne"
 
 version = "0.1~ynh2"
 
-maintainers = ["alexAubin"]
+maintainers = ["mdtita"]
 
 [upstream]
 license = "WTFPL"
@@ -31,17 +31,18 @@ ram.runtime = "1M"
     [install.path]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "path"
-    default = "/helloworld"
+    default = "/admin"
 
     [install.init_main_permission]
     type = "group"
     default = "visitors"
 
 [resources]
+    [resources.sources.main]
+    url = "https://github.com/tale/headplane"
+    [resources.install_dir]
+    #dir = "/var/www/__APP__"
     [resources.system_user]
 
-    [resources.install_dir]
-    group = "www-data:r-x"
-
     [resources.permissions]
-    main.url = "/"
+    main.url = "/admin"

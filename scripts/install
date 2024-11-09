@@ -1,18 +1,79 @@
 #!/bin/bash
 
 source /usr/share/yunohost/helpers
-
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression "Setting up source files..."
+ynh_script_progression --message="Setting up source files..." --weight=1
+# Download, check integrity, uncompress and patch the source from app.src
+git config --system --add safe.directory $install_dir
+git clone https://github.com/tale/headplane.git "$install_dir" --quiet
 
-echo "Hello world!" > $install_dir/index.html
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
+#=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing dependencies..." --weight=2
+ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
+#=================================================
+# INSTALL Headplane
+#=================================================
+ynh_script_progression --message="Building $app... (this will take some time and resources!)" --weight=3
+pushd "$install_dir"
+	ynh_use_nodejs
+	ynh_exec_warn_less npm install -g pnpm
+	ynh_exec_warn_less pnpm install
+	ynh_exec_warn_less pnpm build
+popd
+randomstr=$(ynh_string_random --length=16)
+
+ynh_add_config --template="env" --destination="$install_dir/.env"
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression "Configuring nginx web server..."
+ynh_script_progression --message="Configuring NGINX web server..." --weight=4
 
-# Create a dedicated nginx config
-ynh_config_add_nginx
+# Create a dedicated NGINX config
+ynh_add_nginx_config
+
+#=================================================
+# SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding system configurations related to $app..." --weight=5
+
+# Create a dedicated systemd config
+ynh_add_systemd_config
+
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+#ynh_script_progression --message="Adding a configuration file..."
+
+#ynh_add_config --template="../conf/config.js" --destination="$install_dir/config/config.js"
+
+#chmod 600 "$install_dir/config/config.js"
+#chown $app "$install_dir/config/config.js"
+
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting a systemd service..." --weight=6
+
+# Start a systemd service
+ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
+
+#=================================================
+# APPLY FOLDER RIGHTS
+#=================================================
+
+#chgrp -R www-data $install_dir
+
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Installation of $app completed" --last
