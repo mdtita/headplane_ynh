@@ -1,4 +1,4 @@
-packaging_format = 2
+packaging_format = 2.1
 id = "headplane"
 name = "Headplane"
 description.en = "A dummy basic app to illustrate YunoHost's app packaging."
