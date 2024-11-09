@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__YNH_NODE__ __INSTALL_DIR__/build/headplane/server.js # Adjust the entry point if needed
+ExecStart=__NODEJS_DIR__/node __INSTALL_DIR__/build/headplane/server.js # Adjust the entry point if needed
 Restart=always
 User=__APP__
 Environment=NODE_ENV=production
