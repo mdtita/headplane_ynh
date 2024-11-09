@@ -16,7 +16,7 @@ chown -R root:www-data "$install_dir"
 # INSTALL DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=2
-ynh_install_nodejs --nodejs_version=22
+ynh_nodejs_install
 
 #=================================================
 # INSTALL Headplane
