@@ -40,6 +40,6 @@ ram.runtime = "1M"
 [resources]
 #    [resources.sources.main]
 #    url = "https://github.com/tale/headplane"
+    [resources.system_user]
     [resources.install_dir]
     dir = "/var/www/__APP__"
-    [resources.system_user]
