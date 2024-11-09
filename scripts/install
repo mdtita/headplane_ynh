@@ -24,7 +24,7 @@ ynh_nodejs_install
 #=================================================
 ynh_script_progression --message="Building $app... (this will take some time and resources!)" --weight=3
 pushd "$install_dir"
-	ynh_exec_as_app npm install -g pnpm
+	ynh_exec_as_app npm install pnpm
 	ynh_exec_as_app pnpm install
 	ynh_exec_as_app pnpm build
 popd
