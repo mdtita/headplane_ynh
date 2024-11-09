@@ -46,7 +46,7 @@ ynh_config_add_nginx
 ynh_script_progression --message="Adding system configurations related to $app..." --weight=5
 
 # Create a dedicated systemd config
-ynh_add_systemd_config
+ynh_config_add_systemd
 
 #=================================================
 # ADD A CONFIGURATION
