@@ -45,4 +45,3 @@ ram.runtime = "1M"
     [resources.system_user]
 
     [resources.permissions]
-    main.url = "/admin"
