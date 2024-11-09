@@ -37,9 +37,9 @@ ram.runtime = "1M"
     type = "group"
     default = "visitors"
 
-[resources]
-    [resources.sources.main]
-    url = "https://github.com/tale/headplane"
-    [resources.install_dir]
+#[resources]
+#    [resources.sources.main]
+#    url = "https://github.com/tale/headplane"
+#    [resources.install_dir]
     #dir = "/var/www/__APP__"
-    [resources.system_user]
+#    [resources.system_user]
