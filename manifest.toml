@@ -43,5 +43,3 @@ ram.runtime = "1M"
     [resources.install_dir]
     #dir = "/var/www/__APP__"
     [resources.system_user]
-
-    [resources.permissions]
