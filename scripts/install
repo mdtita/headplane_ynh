@@ -1,5 +1,5 @@
 #!/bin/bash
-#install_dir=/var/www/headplane
+source _common.sh
 source /usr/share/yunohost/helpers
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -17,6 +17,7 @@ chown -R root:www-data "$install_dir"
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=2
 ynh_install_nodejs --nodejs_version=22
+
 #=================================================
 # INSTALL Headplane
 #=================================================
