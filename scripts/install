@@ -1,5 +1,5 @@
 #!/bin/bash
-install_dir=/var/www/headplane
+#install_dir=/var/www/headplane
 source /usr/share/yunohost/helpers
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
