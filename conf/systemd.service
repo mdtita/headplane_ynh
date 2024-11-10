@@ -6,7 +6,7 @@ After=network.target
 WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__NODEJS_DIR__/node __INSTALL_DIR__/build/headplane/server.js # Adjust the entry point if needed
 Restart=always
-User=__APP__
+User=headplane
 Environment=NODE_ENV=production
 Environment=LOAD_ENV_FILE=true
 StandardOutput=syslog

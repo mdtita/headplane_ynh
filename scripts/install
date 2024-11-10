@@ -1,6 +1,9 @@
 #!/bin/bash
 source _common.sh
 source /usr/share/yunohost/helpers
+
+#checking for hedscale user
+check_headscale_user
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
@@ -9,8 +12,8 @@ ynh_script_progression --message="Setting up source files..." --weight=1
 git config --system --add safe.directory $install_dir
 git clone https://github.com/tale/headplane.git "$install_dir" --quiet
 
-chmod -R o-rwx "$install_dir"
-chown -R headplane:www-data "$install_dir"
+#chmod -R o-rwx "$install_dir"
+#chown -R headplane:www-data "$install_dir"
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -32,6 +35,10 @@ popd
 randomstr=$(ynh_string_random --length=16)
 
 ynh_config_add --template="env" --destination="$install_dir/.env"
+
+usermod -aG headscale headplane
+chown -R headplane:headplane "$install_dir"
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
