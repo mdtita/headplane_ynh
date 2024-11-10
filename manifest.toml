@@ -32,6 +32,10 @@ ram.runtime = "50M"
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "path"
     default = "/admin"
+    [install.headscale_url]
+    ask.en = "Enter headscale install URL"
+    type = "string"
+    example = "https://headscale.example.com"
 
     [install.proxy_path]
     ask.en = "Redirect destination path (unix:/file for socket)"
